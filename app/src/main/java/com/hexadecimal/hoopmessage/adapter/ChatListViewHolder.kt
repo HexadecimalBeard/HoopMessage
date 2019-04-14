@@ -15,8 +15,13 @@ import com.hexadecimal.hoopmessage.model.ChatModel
 // itemView cizdirdigimiz bir ui, sadece bir tane aliyor, kac tane olusturması gerekirse kendisi olusturuyor
 // itemview i disaridan parametre olarak aldık
 // sonra solid prensipleri geregi iceride olusturduk
-class ChatListViewHolder(parent: ViewGroup)
-    : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_item_chat_list, parent, false)) {
+class ChatListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.adapter_item_chat_list,
+        parent,
+        false
+    )
+) {
 
     // xml icindeki componentlerin tanımlamalarını yaptık
     private val imgbProfile: ImageView
@@ -40,6 +45,7 @@ class ChatListViewHolder(parent: ViewGroup)
 
         itemView.setOnClickListener {
 
-            onItemClickListener(chatModel) }
+            onItemClickListener(chatModel)
+        }
     }
 }

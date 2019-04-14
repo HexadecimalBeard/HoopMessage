@@ -11,10 +11,14 @@ import com.hexadecimal.hoopmessage.model.ChatModel
 
 // itemcount lazım ama data source yoksa adapter oluşturulurken bir liste almak gerekiyor
 // disaridan verdik list i
-class ChatListAdapter(val chatList: ArrayList<ChatModel>, val onItemClickListener: (chatModel: ChatModel) -> Unit) : RecyclerView.Adapter<ChatListViewHolder>() {
+class ChatListAdapter(
+    val chatList: ArrayList<ChatModel>,
+    val onItemClickListener: (chatModel: ChatModel) -> Unit
+) : RecyclerView.Adapter<ChatListViewHolder>() {
 
     // kullanacagimiz ui verdik
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder = ChatListViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder =
+        ChatListViewHolder(parent)
 
 
     // listelenecek item sayisini verdik
@@ -25,6 +29,6 @@ class ChatListAdapter(val chatList: ArrayList<ChatModel>, val onItemClickListene
     // icinde hangi pozisyondaki item row un degeri var
     override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
         // bind a higher order function vererek onClick olusturduk
-        holder.bind(chatList[position],onItemClickListener)
+        holder.bind(chatList[position], onItemClickListener)
     }
 }

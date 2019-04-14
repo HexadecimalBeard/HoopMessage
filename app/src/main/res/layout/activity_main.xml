@@ -6,12 +6,15 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-
-    <include layout="@layout/layout_tab" />
-
-    <FrameLayout
-        android:id="@+id/frmContainer"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tblLayHoopContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpHoopContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

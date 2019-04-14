@@ -2,54 +2,68 @@ package com.hexadecimal.hoopmessage.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.hexadecimal.hoopmessage.R
-import kotlinx.android.synthetic.main.layout_tab.*
+import com.hexadecimal.hoopmessage.adapter.HoopViewPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), TabLayout.BaseOnTabSelectedListener<TabLayout.Tab>,
+    ViewPager.OnPageChangeListener {
 
-    private val chatsFragment by lazy { ChatsFragment.newInstance() }
-    private val callsFragment by lazy { CallsFragment.newInstance() }
-    private val statusFragment by lazy { StatusFragment.newInstance() }
-    private val cameraFragment by lazy { CameraFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        txtCalls.setOnClickListener(this)
-        txtChats.setOnClickListener(this)
-        txtStatus.setOnClickListener(this)
-        imgbCamera.setOnClickListener(this)
+        vpHoopContainer.adapter =
+            HoopViewPagerAdapter(supportFragmentManager)
 
-        supportFragmentManager.beginTransaction().add(R.id.frmContainer, CameraFragment.newInstance()).commit()
+        tblLayHoopContainer.setupWithViewPager(vpHoopContainer)
+
+        // secili gelen tab i degistirmek icin
+        vpHoopContainer.currentItem = 1
+
+        // tablara tiklandiginda calisir
+        tblLayHoopContainer.addOnTabSelectedListener(this)
+
+        // sayfa swipe ile degistiginde calisir
+        vpHoopContainer.addOnPageChangeListener(this)
+
     }
 
-    override fun onClick(v: View) {
-
-        when (v.id) {
-
-            R.id.txtCalls -> {
-                supportFragmentManager.beginTransaction().replace(R.id.frmContainer, callsFragment)
-                        .commit()
-            }
-            R.id.txtChats -> {
-                supportFragmentManager.beginTransaction().replace(R.id.frmContainer, chatsFragment)
-                        .commit()
-
-            }
-            R.id.txtStatus -> {
-                supportFragmentManager.beginTransaction().replace(R.id.frmContainer, statusFragment)
-                        .commit()
-
-            }
-            R.id.imgbCamera -> {
-                supportFragmentManager.beginTransaction().replace(R.id.frmContainer, cameraFragment)
-                        .commit()
-
-            }
-        }
+    // secilen tab lara gore islem yapmak icin?
+    override fun onTabReselected(p0: TabLayout.Tab?) {
+        Toast.makeText(this, "onTabReSelected", Toast.LENGTH_SHORT).show()
     }
+
+    override fun onTabUnselected(p0: TabLayout.Tab?) {
+        Toast.makeText(this, "onTabUnSelected", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTabSelected(p0: TabLayout.Tab?) {
+        Toast.makeText(this, "onTabSelected", Toast.LENGTH_SHORT).show()
+    }
+
+    // tab a basilip gecilmesiyle swipe yaparak gecilmesi arasinda metodlarin calisma
+    // sirasinda fark var, eger bir metod digerinden veriye ihtiyac duyuyorsa
+    // bu farktan dolayı hata ( null pointer ) olabilir
+
+    // view pager da saga ve sola slide yapildiginde
+    override fun onPageScrollStateChanged(state: Int) {
+        Toast.makeText(this, "onPageScrollStateChanged", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        Toast.makeText(this, "onPageScrolled", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPageSelected(position: Int) {
+        Toast.makeText(this, "onPageSelected", Toast.LENGTH_SHORT).show()
+    }
+
 }
 
 
